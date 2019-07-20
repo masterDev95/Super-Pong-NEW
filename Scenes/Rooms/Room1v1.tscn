@@ -20,14 +20,14 @@ centered = false
 ] instance=ExtResource( 3 )]
 position = Vector2( 64, 563.831 )
 _sensitivity = 25
-_speed = 50
+_speed = 25
 
 [node name="Player2" parent="." groups=[
 "Player2",
 ] instance=ExtResource( 3 )]
 position = Vector2( 1825.38, 547.524 )
 _sensitivity = 25
-_speed = 50
+_speed = 25
 _role = 1
 
 [node name="Ball" parent="." instance=ExtResource( 4 )]
@@ -36,3 +36,8 @@ position = Vector2( 960, 547.524 )
 [node name="DebugUI" parent="." instance=ExtResource( 5 )]
 
 [node name="ScoresContainer" parent="." instance=ExtResource( 6 )]
+
+[node name="BallTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+[connection signal="timeout" from="BallTimer" to="Ball" method="_onBallTimerTimeout"]

@@ -18,14 +18,10 @@ public class Room1v1 : Node2D
 	private void BallReposition()
 	{
 		KinematicBody2D ball = GetNode<KinematicBody2D>("Ball");
-		
-		float xPos = GetViewport().Size.x / 2;
-		float yPos = GetViewport().Size.y / 2;
-
-		ball.Position = new Vector2(xPos, yPos);
+		ball.Position = GetViewport().Size / 2;
 	}
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		PaddleReposition();
 		BallReposition();
