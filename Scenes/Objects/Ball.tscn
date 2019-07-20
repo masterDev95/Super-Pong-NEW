@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Ball.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Ball.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.0949
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0.0733088, 0.9488 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.6496 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 1.05
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 3 )
+
+[node name="Ball" type="KinematicBody2D"]
+position = Vector2( 695.104, 248.165 )
+script = ExtResource( 1 )
+initialSpeed = 300
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.1 )
+show_behind_parent = true
+amount = 32
+lifetime = 0.3
+speed_scale = 3.5
+local_coords = false
+process_material = SubResource( 4 )
+texture = ExtResource( 2 )
