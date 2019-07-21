@@ -77,7 +77,7 @@ public class Paddle : KinematicBody2D
 			velocity.y = ((Speed * Sensitivity) * direction) * delta;
 
 			int spriteHeight = GetNode<Sprite>("Sprite").Texture.GetHeight() - 32;
-			int yPosMin = 0 + spriteHeight / 2, yPosMax = (int)GetViewport().Size.y - spriteHeight / 2;
+			int yPosMin = 0 + spriteHeight / 2, yPosMax = (int)OS.GetScreenSize().y - spriteHeight / 2;
 
 			KinematicCollision2D collision = MoveAndCollide(velocity);
 

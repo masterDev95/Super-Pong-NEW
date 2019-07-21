@@ -55,6 +55,7 @@
     <Compile Include="Scripts\Paddle.cs" />
     <Compile Include="Scripts\Room1v1.cs" />
     <Compile Include="Scripts\ScoresContainer.cs" />
+    <Compile Include="Scripts\TitleMenu.cs" />
     <Compile Include="Scripts\Trail.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
