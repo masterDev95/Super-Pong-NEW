@@ -1,0 +1,5 @@
+[gd_scene format=2]
+
+[node name="BallTimer" type="Timer"]
+wait_time = 2.0
+autostart = true

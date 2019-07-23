@@ -53,10 +53,11 @@
     <Compile Include="Scripts\Ball.cs" />
     <Compile Include="Scripts\DebugUI.cs" />
     <Compile Include="Scripts\Paddle.cs" />
+    <Compile Include="Scripts\PongScene.cs" />
     <Compile Include="Scripts\Room1v1.cs" />
     <Compile Include="Scripts\ScoresContainer.cs" />
     <Compile Include="Scripts\TitleMenu.cs" />
-    <Compile Include="Scripts\Trail.cs" />
+    <Compile Include="Scripts\UIButtonManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

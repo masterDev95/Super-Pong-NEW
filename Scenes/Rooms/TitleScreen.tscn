@@ -1,92 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/xirod.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scripts/TitleMenu.cs" type="Script" id=2]
-[ext_resource path="res://DynamicFonts/TitleMenu.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Assets/NinePatchTexture.svg" type="Texture" id=4]
+[ext_resource path="res://Scenes/Objects/PongScene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Objects/TitleScreenGUI.tscn" type="PackedScene" id=2]
 
-[sub_resource type="DynamicFont" id=1]
-size = 90
-font_data = ExtResource( 1 )
+[node name="TitleScreen" type="Node2D"]
 
-[node name="TitleScreen" type="MarginContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_top = 192
-custom_constants/margin_left = 192
+[node name="PongScene" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 192.0
-margin_top = 192.0
+[node name="Player1" parent="PongScene" index="1"]
+_sensitivity = 0
+_speed = 5
+_role = 2
+
+[node name="Player2" parent="PongScene" index="2"]
+_sensitivity = 0
+_speed = 5
+_role = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1920.0
 margin_bottom = 1080.0
-custom_constants/separation = 48
+color = Color( 0, 0, 0, 0.65 )
 
-[node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 1728.0
-margin_bottom = 109.0
-custom_fonts/font = SubResource( 1 )
-text = "Super Pong"
+[node name="TitleScreenGUI" parent="." instance=ExtResource( 2 )]
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 157.0
-margin_right = 1728.0
-margin_bottom = 197.0
-custom_constants/margin_left = 8
-
-[node name="TitleMenu" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
-margin_left = 8.0
-margin_right = 520.0
-margin_bottom = 40.0
-size_flags_horizontal = 0
-custom_constants/separation = 92
-script = ExtResource( 2 )
-
-[node name="PlayLabel" type="Label" parent="VBoxContainer/MarginContainer/TitleMenu"]
-editor/display_folded = true
-margin_right = 88.0
-margin_bottom = 40.0
-custom_fonts/font = ExtResource( 3 )
-text = "Jouer"
-uppercase = true
-
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/MarginContainer/TitleMenu/PlayLabel"]
-show_behind_parent = true
-margin_left = -10.0
-margin_right = 138.0
-margin_bottom = 40.0
-texture = ExtResource( 4 )
-
-[node name="OptionsLabel" type="Label" parent="VBoxContainer/MarginContainer/TitleMenu"]
-editor/display_folded = true
-margin_left = 180.0
-margin_right = 303.0
-margin_bottom = 40.0
-custom_fonts/font = ExtResource( 3 )
-text = "Options"
-uppercase = true
-
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/MarginContainer/TitleMenu/OptionsLabel"]
-visible = false
-show_behind_parent = true
-margin_left = -10.0
-margin_right = 170.0
-margin_bottom = 40.0
-texture = ExtResource( 4 )
-
-[node name="QuitLabel" type="Label" parent="VBoxContainer/MarginContainer/TitleMenu"]
-editor/display_folded = true
-margin_left = 395.0
-margin_right = 512.0
-margin_bottom = 40.0
-custom_fonts/font = ExtResource( 3 )
-text = "Quitter"
-uppercase = true
-
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/MarginContainer/TitleMenu/QuitLabel"]
-visible = false
-show_behind_parent = true
-margin_left = -10.0
-margin_right = 170.0
-margin_bottom = 40.0
-texture = ExtResource( 4 )
+[editable path="PongScene"]

@@ -3,7 +3,6 @@ using System;
 
 public class Ball : KinematicBody2D
 {
-	[Export]
 	private int initialSpeed;
 
 	private int _speed;
@@ -15,6 +14,7 @@ public class Ball : KinematicBody2D
 
 		_direction.x = GD.RandRange(-1, 1) > 0 ? 1 : -1;
 		_direction.y = (float)GD.RandRange(-.75, .75);
+		initialSpeed = 300;
 	}
 
 	public int Speed { get => _speed; set => _speed = value; }

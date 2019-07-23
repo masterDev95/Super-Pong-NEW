@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public class Room1v1 : Node2D
+public class PongScene : Node2D
 {
-	private void PaddleReposition()
+    private void PaddleReposition()
 	{
 		KinematicBody2D p1 = GetNode<KinematicBody2D>("Player1");
 		KinematicBody2D p2 = GetNode<KinematicBody2D>("Player2");

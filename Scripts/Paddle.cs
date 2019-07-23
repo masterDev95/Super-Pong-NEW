@@ -16,12 +16,14 @@ public class Paddle : KinematicBody2D
 	private Role _role;
 
 	private Color _color;
-	private int _score;
 
-	private string keyLeft;
-	private string keyRight;
+	private int _score;
+	private int _spriteHeight;
+
 	private string keyUp;
 	private string keyDown;
+
+	private float randY;
 
 	public Paddle()
 	{
@@ -33,9 +35,10 @@ public class Paddle : KinematicBody2D
 
 	public int Sensitivity { get => _sensitivity; set => _sensitivity = value; }
 	public int Speed { get => _speed; set => _speed = value; }
-	public Color Color { get => _color; set => _color = value; }
 	internal Role Role { get => _role; set => _role = value; }
+	public Color Color { get => _color; set => _color = value; }
 	public int Score { get => _score; set => _score = value; }
+	public int SpriteHeight { get => _spriteHeight; set => _spriteHeight = value; }
 
 	public void AttributeKeys()
 	{
@@ -54,6 +57,10 @@ public class Paddle : KinematicBody2D
 
 	public override void _Ready()
 	{
+		SpriteHeight = GetNode<Sprite>("Sprite").Texture.GetHeight();
+
+		randY = (float)GD.RandRange(-(SpriteHeight / 2), SpriteHeight / 2);
+
 		GetNode<Sprite>("Sprite").SelfModulate = Color;
 
 		if (Role != Role.IA)
@@ -64,37 +71,50 @@ public class Paddle : KinematicBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		// Not IA section
+		// Move paddle
+		int spriteHeight = SpriteHeight - 32;
+		int yPosMin = 0 + spriteHeight / 2, yPosMax = (int)OS.GetScreenSize().y - spriteHeight / 2;
+
+		float direction, positionLimit;
+
+		KinematicBody2D Ball = GetParent().GetNode<KinematicBody2D>("Ball");
+		
+		Vector2 velocity = new Vector2(0, 0);
+
 		if (Role != Role.IA)
 		{
-			// Move paddle
-			float direction = Input.GetActionStrength(keyDown) - Input.GetActionStrength(keyUp);
-			float positionLimit;
-
-			Vector2 velocity;
-
-			velocity.x = 0;
+			direction = Input.GetActionStrength(keyDown) - Input.GetActionStrength(keyUp);
 			velocity.y = ((Speed * Sensitivity) * direction) * delta;
+		}
+		else
+		{
+			direction = Ball.Position.y + randY - Position.y;
 
-			int spriteHeight = GetNode<Sprite>("Sprite").Texture.GetHeight() - 32;
-			int yPosMin = 0 + spriteHeight / 2, yPosMax = (int)OS.GetScreenSize().y - spriteHeight / 2;
-
-			KinematicCollision2D collision = MoveAndCollide(velocity);
-
-			positionLimit = Mathf.Clamp(Position.y, yPosMin, yPosMax);
-			Position = new Vector2(Position.x, positionLimit);
-
-			// Flip ball when colliding
-			if (collision != null)
+			if (GetName() == "Player1" && Ball.Position.x < OS.GetScreenSize().x / 2
+			|| GetName() == "Player2" && Ball.Position.x > OS.GetScreenSize().x / 2)
 			{
-				Ball ball = (Ball)collision.Collider;
-				float yDir = (ball.Position.y - Position.y) / 100;
-				
-				if (Position.x < ball.Position.x)
-					ball.Direction = new Vector2(1, yDir);
-				else
-					ball.Direction = new Vector2(-1, yDir);
+				velocity.y = Speed * direction * delta;
 			}
+		}
+
+
+		positionLimit = Mathf.Clamp(Position.y, yPosMin, yPosMax);
+		Position = new Vector2(Position.x, positionLimit);
+
+		KinematicCollision2D collision = MoveAndCollide(velocity);
+
+		// Flip ball when colliding
+		if (collision != null)
+		{
+			Ball ball = (Ball)collision.Collider;
+			float yDir = (ball.Position.y - Position.y) / 100;
+			
+			if (Position.x < ball.Position.x)
+				ball.Direction = new Vector2(1, yDir);
+			else
+				ball.Direction = new Vector2(-1, yDir);
+
+			randY = (float)GD.RandRange(-(SpriteHeight / 2), SpriteHeight / 2);
 		}
 	}
 }
