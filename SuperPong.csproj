@@ -53,6 +53,7 @@
     <Compile Include="Scripts\Ball.cs" />
     <Compile Include="Scripts\DebugUI.cs" />
     <Compile Include="Scripts\Paddle.cs" />
+    <Compile Include="Scripts\PauseScreen.cs" />
     <Compile Include="Scripts\PongScene.cs" />
     <Compile Include="Scripts\Room1v1.cs" />
     <Compile Include="Scripts\ScoresContainer.cs" />

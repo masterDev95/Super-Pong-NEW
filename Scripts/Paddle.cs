@@ -97,11 +97,10 @@ public class Paddle : KinematicBody2D
 			}
 		}
 
-
+		KinematicCollision2D collision = MoveAndCollide(velocity);
+		
 		positionLimit = Mathf.Clamp(Position.y, yPosMin, yPosMax);
 		Position = new Vector2(Position.x, positionLimit);
-
-		KinematicCollision2D collision = MoveAndCollide(velocity);
 
 		// Flip ball when colliding
 		if (collision != null)

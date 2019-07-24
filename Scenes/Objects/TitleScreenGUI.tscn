@@ -43,7 +43,6 @@ custom_constants/separation = 92
 script = ExtResource( 2 )
 
 [node name="PlayLabel" type="Label" parent="VBoxContainer/MarginContainer/TitleMenu"]
-editor/display_folded = true
 margin_right = 88.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 3 )

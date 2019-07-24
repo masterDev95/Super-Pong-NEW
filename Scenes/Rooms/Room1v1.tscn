@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Objects/PongScene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Objects/PauseScreen.tscn" type="PackedScene" id=2]
 
 [node name="Room1v1" type="Node2D"]
 
 [node name="PongScene" parent="." instance=ExtResource( 1 )]
+editor/display_folded = true
+
+[node name="PauseScreen" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [editable path="PongScene"]
