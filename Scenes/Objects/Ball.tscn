@@ -23,6 +23,7 @@ scale_curve = SubResource( 3 )
 [node name="Ball" type="KinematicBody2D"]
 position = Vector2( 695.104, 248.165 )
 script = ExtResource( 1 )
+initialSpeed = 300
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
