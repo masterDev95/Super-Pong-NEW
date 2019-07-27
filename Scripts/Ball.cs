@@ -22,7 +22,7 @@ public class Ball : KinematicBody2D
 
 	public void ResetBall()
 	{
-		Direction = new Vector2(Direction.x, (float)GD.RandRange(-.75, .75));
+		Direction = new Vector2(-Direction.x, (float)GD.RandRange(-.75, .75));
 		Position = OS.GetScreenSize() / 2;
 		Speed = 0;
 
