@@ -6,7 +6,6 @@
 [node name="Room1v1" type="Node2D"]
 
 [node name="PongScene" parent="." instance=ExtResource( 1 )]
-editor/display_folded = true
 
 [node name="PauseScreen" parent="." instance=ExtResource( 2 )]
 visible = false

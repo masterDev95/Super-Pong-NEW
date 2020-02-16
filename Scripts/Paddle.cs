@@ -73,7 +73,7 @@ public class Paddle : KinematicBody2D
 	{
 		// Move paddle
 		int spriteHeight = SpriteHeight - 32;
-		int yPosMin = 0 + spriteHeight / 2, yPosMax = (int)OS.GetScreenSize().y - spriteHeight / 2;
+		int yPosMin = 0 + spriteHeight / 2, yPosMax = (int)GetViewport().GetVisibleRect().Size.y - spriteHeight / 2;
 
 		float direction, positionLimit;
 
@@ -90,8 +90,8 @@ public class Paddle : KinematicBody2D
 		{
 			direction = Ball.Position.y + randY - Position.y;
 
-			if (GetName() == "Player1" && Ball.Position.x < OS.GetScreenSize().x / 2
-			|| GetName() == "Player2" && Ball.Position.x > OS.GetScreenSize().x / 2)
+			if (Name == "Player1" && Ball.Position.x < GetViewport().GetVisibleRect().Size.x / 2
+			|| Name == "Player2" && Ball.Position.x > GetViewport().GetVisibleRect().Size.x / 2)
 			{
 				velocity.y = Speed * direction * delta;
 			}

@@ -23,7 +23,7 @@ public class Ball : KinematicBody2D
 	public void ResetBall()
 	{
 		Direction = new Vector2(-Direction.x, (float)GD.RandRange(-.75, .75));
-		Position = OS.GetScreenSize() / 2;
+		Position = GetViewport().GetVisibleRect().Size / 2;
 		Speed = 0;
 
 		GetParent().GetNode<Timer>("BallTimer").Start();
@@ -46,7 +46,7 @@ public class Ball : KinematicBody2D
 
 		// Outside scene detection
 		float spriteHeight = GetNode<Sprite>("Sprite").Texture.GetHeight() - 26;
-		Vector2 screenSize = OS.GetScreenSize();
+		Vector2 screenSize = GetViewport().GetVisibleRect().Size;
 
 		if ((Position.y - spriteHeight / 2 < 0 && Direction.y < 0)
 		|| (Position.y + spriteHeight / 2 > screenSize.y && Direction.y > 0))

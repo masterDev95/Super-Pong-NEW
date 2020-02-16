@@ -58,14 +58,14 @@ public class PauseScreen : Node2D
             switch (Index)
             {
                 case PauseIndex.Yes:
-                    cursor.SetPosition(yesLabel.GetPosition());
+                    cursor.SetPosition(yesLabel.RectPosition);
                     break;
                 case PauseIndex.No:
-                    cursor.SetPosition(noLabel.GetPosition());
+                    cursor.SetPosition(noLabel.RectPosition);
                     break;
             }
 
-            cursor.SetPosition(cursor.GetPosition() + cursorOffset);
+            cursor.SetPosition(cursor.RectPosition + cursorOffset);
         }
         else
         {

@@ -16,6 +16,8 @@ scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 centered = false
 
+[node name="ScoresContainer" parent="." instance=ExtResource( 6 )]
+
 [node name="Player1" parent="." groups=[
 "Player1",
 ] instance=ExtResource( 3 )]
@@ -36,8 +38,6 @@ position = Vector2( 960, 547.524 )
 
 [node name="DebugUI" parent="." instance=ExtResource( 5 )]
 z_index = 100
-
-[node name="ScoresContainer" parent="." instance=ExtResource( 6 )]
 
 [node name="BallTimer" parent="." instance=ExtResource( 7 )]
 [connection signal="timeout" from="BallTimer" to="Ball" method="_onBallTimerTimeout"]
