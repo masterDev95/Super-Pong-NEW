@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/PongScene.cs" type="Script" id=1]
 [ext_resource path="res://Assets/bg_terrain.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Objects/DebugUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Objects/ScoresContainer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Objects/BallTimer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Objects/PaddleTimer.tscn" type="PackedScene" id=8]
 
 [node name="PongScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -40,4 +41,11 @@ position = Vector2( 960, 547.524 )
 z_index = 100
 
 [node name="BallTimer" parent="." instance=ExtResource( 7 )]
+one_shot = true
+
+[node name="PaddleTimer" parent="." instance=ExtResource( 8 )]
+wait_time = 0.5
+autostart = true
 [connection signal="timeout" from="BallTimer" to="Ball" method="_onBallTimerTimeout"]
+[connection signal="timeout" from="PaddleTimer" to="Player1" method="_onPaddleTimerTimeout"]
+[connection signal="timeout" from="PaddleTimer" to="Player2" method="_onPaddleTimerTimeout"]

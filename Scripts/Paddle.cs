@@ -69,6 +69,11 @@ public class Paddle : KinematicBody2D
 		}
 	}
 
+	public void _onPaddleTimerTimeout()
+	{
+		randY = (float)GD.RandRange(-(SpriteHeight / 2) + 4, SpriteHeight / 2) + 4;
+	}
+
 	public override void _PhysicsProcess(float delta)
 	{
 		// Move paddle
@@ -102,7 +107,7 @@ public class Paddle : KinematicBody2D
 		positionLimit = Mathf.Clamp(Position.y, yPosMin, yPosMax);
 		Position = new Vector2(Position.x, positionLimit);
 
-		// Flip ball when colliding
+		// Collision
 		if (collision != null)
 		{
 			Ball ball = (Ball)collision.Collider;
@@ -113,7 +118,7 @@ public class Paddle : KinematicBody2D
 			else
 				ball.Direction = new Vector2(-1, yDir);
 
-			randY = (float)GD.RandRange(-(SpriteHeight / 2), SpriteHeight / 2);
+			ball.Speed += 50;
 		}
 	}
 }
