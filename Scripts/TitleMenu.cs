@@ -25,6 +25,7 @@ public class TitleMenu : HBoxContainer
 
     public override void _Process(float delta)
     {
+
         bool indexHasChanged = false;
 
         if (Input.IsActionJustPressed("ui_left"))
@@ -53,6 +54,17 @@ public class TitleMenu : HBoxContainer
             {
                 case MenuIndex.Play:
                     GetTree().ChangeScene("res://Scenes/Rooms/Room1v1.tscn");
+                    break;
+                case MenuIndex.Options:
+                    var optionScreen = GetNode<Control>("/root/TitleScreen/OptionScreenGUI");
+                    var titleScreen = GetNode<Control>("/root/TitleScreen/TitleScreenGUI");
+                    
+                    optionScreen.Visible = true;
+                    titleScreen.Visible = false;
+
+                    optionScreen.SetProcess(true);
+                    SetProcess(false);
+
                     break;
                 case MenuIndex.Quit:
                     GetTree().Quit();

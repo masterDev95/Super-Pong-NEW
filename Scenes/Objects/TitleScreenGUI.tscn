@@ -1,13 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/xirod.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://DynamicFonts/TitleH1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/TitleMenu.cs" type="Script" id=2]
 [ext_resource path="res://DynamicFonts/TitleMenu.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/NinePatchTexture.svg" type="Texture" id=4]
-
-[sub_resource type="DynamicFont" id=1]
-size = 90
-font_data = ExtResource( 1 )
 
 [node name="TitleScreenGUI" type="MarginContainer"]
 anchor_right = 1.0
@@ -25,7 +21,7 @@ custom_constants/separation = 48
 [node name="Title" type="Label" parent="VBoxContainer"]
 margin_right = 1728.0
 margin_bottom = 109.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 1 )
 text = "Super Pong"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
@@ -57,7 +53,6 @@ margin_bottom = 40.0
 texture = ExtResource( 4 )
 
 [node name="OptionsLabel" type="Label" parent="VBoxContainer/MarginContainer/TitleMenu"]
-editor/display_folded = true
 margin_left = 180.0
 margin_right = 303.0
 margin_bottom = 40.0
@@ -74,7 +69,6 @@ margin_bottom = 40.0
 texture = ExtResource( 4 )
 
 [node name="QuitLabel" type="Label" parent="VBoxContainer/MarginContainer/TitleMenu"]
-editor/display_folded = true
 margin_left = 395.0
 margin_right = 512.0
 margin_bottom = 40.0
