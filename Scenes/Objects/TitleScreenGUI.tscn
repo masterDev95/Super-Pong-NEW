@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://DynamicFonts/TitleH1.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Scripts/TitleMenu.cs" type="Script" id=2]
 [ext_resource path="res://DynamicFonts/TitleMenu.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/NinePatchTexture.svg" type="Texture" id=4]
 
@@ -10,6 +9,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_top = 350
 custom_constants/margin_left = 192
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 192.0
@@ -36,7 +38,6 @@ margin_right = 520.0
 margin_bottom = 40.0
 size_flags_horizontal = 0
 custom_constants/separation = 92
-script = ExtResource( 2 )
 
 [node name="PlayLabel" type="Label" parent="VBoxContainer/MarginContainer/TitleMenu"]
 margin_right = 88.0
@@ -46,6 +47,7 @@ text = "Jouer"
 uppercase = true
 
 [node name="Background" type="NinePatchRect" parent="VBoxContainer/MarginContainer/TitleMenu/PlayLabel"]
+visible = false
 show_behind_parent = true
 margin_left = -10.0
 margin_right = 138.0

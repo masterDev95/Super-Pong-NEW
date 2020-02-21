@@ -18,6 +18,7 @@ public class Paddle : KinematicBody2D
 	private Color _color;
 
 	private int _score;
+	private int _spriteWidth;
 	private int _spriteHeight;
 
 	private string keyUp;
@@ -38,6 +39,7 @@ public class Paddle : KinematicBody2D
 	internal Role Role { get => _role; set => _role = value; }
 	public Color Color { get => _color; set => _color = value; }
 	public int Score { get => _score; set => _score = value; }
+	public int SpriteWidth { get => _spriteWidth; set => _spriteWidth = value; }
 	public int SpriteHeight { get => _spriteHeight; set => _spriteHeight = value; }
 
 	public void AttributeKeys()
@@ -57,6 +59,7 @@ public class Paddle : KinematicBody2D
 
 	public override void _Ready()
 	{
+		SpriteWidth = GetNode<Sprite>("Sprite").Texture.GetWidth();
 		SpriteHeight = GetNode<Sprite>("Sprite").Texture.GetHeight();
 
 		randY = (float)GD.RandRange(-(SpriteHeight / 2), SpriteHeight / 2);
@@ -112,12 +115,18 @@ public class Paddle : KinematicBody2D
 		{
 			Ball ball = (Ball)collision.Collider;
 			float yDir = (ball.Position.y - Position.y) / 100;
-			
-			if (Position.x < ball.Position.x)
-				ball.Direction = new Vector2(1, yDir);
-			else
-				ball.Direction = new Vector2(-1, yDir);
 
+			if (Position.x < ball.Position.x)
+			{
+				ball.Direction = new Vector2(1, yDir);
+				ball.Position = new Vector2(Position.x + SpriteWidth / 2, ball.Position.y);
+			}
+			else
+			{
+				ball.Direction = new Vector2(-1, yDir);
+				ball.Position = new Vector2(Position.x - SpriteWidth / 2, ball.Position.y);
+			}
+			
 			ball.Speed += 50;
 		}
 	}

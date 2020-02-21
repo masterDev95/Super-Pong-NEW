@@ -62,7 +62,7 @@ public class TitleMenu : HBoxContainer
                     optionScreen.Visible = true;
                     titleScreen.Visible = false;
 
-                    optionScreen.SetProcess(true);
+                    optionScreen.GetNode("MarginContainer/VBoxContainer/OptionMenu").SetProcess(true);
                     SetProcess(false);
 
                     break;

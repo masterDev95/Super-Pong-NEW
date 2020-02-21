@@ -54,13 +54,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Ball.cs" />
     <Compile Include="Scripts\DebugUI.cs" />
-    <Compile Include="Scripts\OptionScreenGUI.cs" />
+    <Compile Include="Scripts\EasingFunction.cs" />
     <Compile Include="Scripts\Paddle.cs" />
     <Compile Include="Scripts\PauseScreen.cs" />
     <Compile Include="Scripts\PongScene.cs" />
     <Compile Include="Scripts\Room1v1.cs" />
     <Compile Include="Scripts\ScoresContainer.cs" />
-    <Compile Include="Scripts\TitleMenu.cs" />
+    <Compile Include="Scripts\TitleScreenCursor.cs" />
     <Compile Include="Scripts\UIButtonManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
