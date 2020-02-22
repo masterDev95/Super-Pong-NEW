@@ -37,6 +37,12 @@ public class TitleScreenCursor : Node2D
         Position = new Vector2(x, y);
     }
 
+    private void ResetTween()
+    {
+        time = 0;
+        prevPos = Position;
+    }
+
     public override void _Ready()
     {
         menu            = Menu.Title;
@@ -72,8 +78,7 @@ public class TitleScreenCursor : Node2D
                 else
                     menuIndex--;
 
-                prevPos = Position;
-                time = 0;
+                ResetTween();
             }
 
             if (Input.IsActionJustPressed("ui_right"))
@@ -83,8 +88,7 @@ public class TitleScreenCursor : Node2D
                 else
                     menuIndex++;
 
-                prevPos = Position;
-                time = 0;
+                ResetTween();
             }
 
             if (Input.IsActionJustPressed("ui_accept"))
@@ -95,8 +99,7 @@ public class TitleScreenCursor : Node2D
                         GetTree().ChangeScene("res://Scenes/Rooms/Room1v1.tscn");
                         break;
                     case MenuIndex.Options:
-                        prevPos = Position;
-                        time = 0;
+                        ResetTween();
 
                         menu = Menu.Option;
                         optionScreenGUI.Visible = true;
@@ -136,8 +139,7 @@ public class TitleScreenCursor : Node2D
 
             if (Input.IsActionJustPressed("ui_cancel"))
             {
-                prevPos = Position;
-                time = 0;
+                ResetTween();
 
                 menu = Menu.Title;
                 titleScreenGUI.Visible = true;
@@ -151,8 +153,7 @@ public class TitleScreenCursor : Node2D
                 else
                     optionMenuIndex--;
 
-                prevPos = Position;
-                time = 0;
+                ResetTween();
             }
 
             if (Input.IsActionJustPressed("ui_down"))
@@ -162,8 +163,7 @@ public class TitleScreenCursor : Node2D
                 else
                     optionMenuIndex++;
 
-                prevPos = Position;
-                time = 0;
+                ResetTween();
             }
 
             switch (optionMenuIndex)
