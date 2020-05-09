@@ -13,7 +13,7 @@ enum MenuIndex
 
 enum OptionMenuIndex
 {
-    Resolution, Fullscreen, Vsync, Input
+    Resolution, Fullscreen, Vsync
 }
 
 public class TitleScreenCursor : Node2D
@@ -149,7 +149,7 @@ public class TitleScreenCursor : Node2D
             if (Input.IsActionJustPressed("ui_up"))
             {
                 if (optionMenuIndex == OptionMenuIndex.Resolution)
-                    optionMenuIndex = OptionMenuIndex.Input;
+                    optionMenuIndex = OptionMenuIndex.Vsync;
                 else
                     optionMenuIndex--;
 
@@ -158,7 +158,7 @@ public class TitleScreenCursor : Node2D
 
             if (Input.IsActionJustPressed("ui_down"))
             {
-                if (optionMenuIndex == OptionMenuIndex.Input)
+                if (optionMenuIndex == OptionMenuIndex.Vsync)
                     optionMenuIndex = OptionMenuIndex.Resolution;
                 else
                     optionMenuIndex++;
@@ -176,9 +176,6 @@ public class TitleScreenCursor : Node2D
                     break;
                 case OptionMenuIndex.Vsync:
                     label = GetNode<Label>(optionScreenMenuPath + "/VsyncValue");
-                    break;
-                case OptionMenuIndex.Input:
-                    label = GetNode<Label>(optionScreenMenuPath + "/InputValue");
                     break;
             }
             

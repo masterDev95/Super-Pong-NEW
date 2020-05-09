@@ -94,8 +94,6 @@ public class OneVsOneCursor : Node2D
         float y         = menuContainer.RectPosition.y + marginContainer.RectPosition.y + label.RectPosition.y + label.RectSize.y / 2 ;
         var labelPos    = new Vector2(x, y);
 
-        GD.Print(labelPos);
-
         AnimateTween(prevPos, labelPos);
     }
 }

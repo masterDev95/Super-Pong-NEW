@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://DynamicFonts/TitleH1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://DynamicFonts/OptionValues.tres" type="DynamicFont" id=2]
 [ext_resource path="res://DynamicFonts/TitleMenu.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Scenes/Objects/Cursor.tscn" type="PackedScene" id=4]
-
+[ext_resource path="res://Scripts/OptionScreenGUI.cs" type="Script" id=5]
 
 [node name="OptionScreenGUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -40,7 +41,7 @@ align = 1
 [node name="OptionMenu" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 269.0
 margin_right = 1024.0
-margin_bottom = 525.0
+margin_bottom = 453.0
 custom_constants/vseparation = 32
 columns = 2
 
@@ -94,24 +95,6 @@ margin_bottom = 184.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Oui"
-align = 2
-
-[node name="InputLabel" type="Label" parent="MarginContainer/VBoxContainer/OptionMenu"]
-margin_top = 216.0
-margin_right = 510.0
-margin_bottom = 256.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 3 )
-text = "Commandes"
-
-[node name="InputValue" type="Label" parent="MarginContainer/VBoxContainer/OptionMenu"]
-margin_left = 514.0
-margin_top = 216.0
-margin_right = 1024.0
-margin_bottom = 256.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-text = "Clavier"
 align = 2
 
 [node name="Cursor" parent="." instance=ExtResource( 4 )]

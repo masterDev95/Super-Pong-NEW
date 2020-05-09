@@ -33,6 +33,7 @@ show_behind_parent = false
 script = ExtResource( 5 )
 
 [node name="TitleScreenGUI" parent="." instance=ExtResource( 2 )]
+pause_mode = 2
 
 [node name="OptionScreenGUI" parent="." instance=ExtResource( 3 )]
 visible = false

@@ -17,7 +17,8 @@ _global_script_class_icons={
 
 config/name="SuperPong"
 run/main_scene="res://Scenes/Rooms/TitleScreen.tscn"
-config/icon="res://icon.png"
+config/icon="res://Icons/icon.png"
+config/windows_native_icon="res://Icons/icon.ico"
 
 [autoload]
 
