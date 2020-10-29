@@ -1,11 +1,6 @@
 using Godot;
 using System;
 
-enum Role
-{
-	P1, P2, IA
-}
-
 public class Paddle : KinematicBody2D
 {
 	[Export]
@@ -13,17 +8,13 @@ public class Paddle : KinematicBody2D
 	[Export]
 	private int _speed;
 	[Export]
-	private Role _role;
+	private Roles _role;
 
 	private Color _color;
-
-	private int _score;
-	private int _spriteWidth;
-	private int _spriteHeight;
-
 	private string keyUp;
 	private string keyDown;
-
+	private int _spriteWidth;
+	private int _spriteHeight;
 	private float randY;
 
 	public Paddle()
@@ -31,65 +22,56 @@ public class Paddle : KinematicBody2D
 		GD.Randomize();
 		_color = new Color((int)GD.RandRange(0, Math.Pow(2, 31)));
 		_color.a = 1;
-		_score = 0;
+		Score = 0;
 	}
 
 	public int Sensitivity { get => _sensitivity; set => _sensitivity = value; }
 	public int Speed { get => _speed; set => _speed = value; }
-	internal Role Role { get => _role; set => _role = value; }
-	public Color Color { get => _color; set => _color = value; }
-	public int Score { get => _score; set => _score = value; }
-	public int SpriteWidth { get => _spriteWidth; set => _spriteWidth = value; }
-	public int SpriteHeight { get => _spriteHeight; set => _spriteHeight = value; }
-
-	public void AttributeKeys()
-	{
-		switch (Role)
-		{
-			case Role.P1:
-				keyUp = "P1_up";
-				keyDown = "P1_down";
-				break;
-			case Role.P2:
-				keyUp = "P2_up";
-				keyDown = "P2_down";
-				break;
-		}
-	}
+	public int Score { get; set; }
 
 	public override void _Ready()
 	{
-		SpriteWidth = GetNode<Sprite>("Sprite").Texture.GetWidth();
-		SpriteHeight = GetNode<Sprite>("Sprite").Texture.GetHeight();
+		_spriteWidth = GetNode<Sprite>("Sprite").Texture.GetWidth();
+		_spriteHeight = GetNode<Sprite>("Sprite").Texture.GetHeight();
 
-		randY = (float)GD.RandRange(-(SpriteHeight / 2), SpriteHeight / 2);
+		randY = (float)GD.RandRange(-(_spriteHeight / 2), _spriteHeight / 2);
 
-		GetNode<Sprite>("Sprite").SelfModulate = Color;
+		GetNode<Sprite>("Sprite").SelfModulate = _color;
 
-		if (Role != Role.IA)
+		if (_role != Roles.IA)
 		{
-			AttributeKeys();
+			switch (_role)
+			{
+				case Roles.P1:
+					keyUp = "P1_up";
+					keyDown = "P1_down";
+					break;
+				case Roles.P2:
+					keyUp = "P2_up";
+					keyDown = "P2_down";
+					break;
+			}
 		}
 	}
 
 	public void _onPaddleTimerTimeout()
 	{
-		randY = (float)GD.RandRange(-(SpriteHeight / 2) + 4, SpriteHeight / 2) + 4;
+		randY = (float)GD.RandRange(-(_spriteHeight / 2) + 4, _spriteHeight / 2) + 4;
 	}
 
 	public override void _PhysicsProcess(float delta)
 	{
 		// Move paddle
-		int spriteHeight = SpriteHeight - 32;
-		int yPosMin = 0 + spriteHeight / 2, yPosMax = (int)GetViewport().GetVisibleRect().Size.y - spriteHeight / 2;
-
+		var paddleHeight = _spriteHeight - 32;
+		var yPosMin = 0 + paddleHeight / 2;
+		var yPosMax = (int)GetViewport().GetVisibleRect().Size.y - paddleHeight / 2;
 		float direction, positionLimit;
 
 		KinematicBody2D Ball = GetParent().GetNode<KinematicBody2D>("Ball");
 		
 		Vector2 velocity = new Vector2(0, 0);
 
-		if (Role != Role.IA)
+		if (_role != Roles.IA)
 		{
 			direction = Input.GetActionStrength(keyDown) - Input.GetActionStrength(keyUp);
 			velocity.y = ((Speed * Sensitivity) * direction) * delta;
@@ -119,15 +101,20 @@ public class Paddle : KinematicBody2D
 			if (Position.x < ball.Position.x)
 			{
 				ball.Direction = new Vector2(1, yDir);
-				ball.Position = new Vector2(Position.x + SpriteWidth / 2, ball.Position.y);
+				ball.Position = new Vector2(Position.x + _spriteWidth / 2, ball.Position.y);
 			}
 			else
 			{
 				ball.Direction = new Vector2(-1, yDir);
-				ball.Position = new Vector2(Position.x - SpriteWidth / 2, ball.Position.y);
+				ball.Position = new Vector2(Position.x - _spriteWidth / 2, ball.Position.y);
 			}
 			
 			ball.Speed += 50;
 		}
+	}
+
+	private enum Roles
+	{
+		P1, P2, IA
 	}
 }

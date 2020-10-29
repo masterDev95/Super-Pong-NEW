@@ -10,5 +10,8 @@ public class DebugUI : Node2D
 
         if (Input.IsActionJustPressed("debug_ui_toggle"))
             Visible = !Visible;
+
+        if (Input.IsActionJustPressed("debug_vsync_toggle"))
+            OS.VsyncEnabled = !OS.VsyncEnabled;
     }
 }

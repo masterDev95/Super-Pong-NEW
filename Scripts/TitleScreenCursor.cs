@@ -1,21 +1,6 @@
 using Godot;
 using System;
 
-enum Menu
-{
-    Title, Option
-}
-
-enum MenuIndex
-{
-    Play, Options, Quit
-}
-
-enum OptionMenuIndex
-{
-    Resolution, Fullscreen, Vsync
-}
-
 public class TitleScreenCursor : Node2D
 {
     Menu menu;
@@ -32,8 +17,8 @@ public class TitleScreenCursor : Node2D
     private void AnimateTween(Vector2 startPos, Vector2 changePos)
     {
         if (time < duration) time++;
-        var x = EasingFunction.EaseOutQuint(time, startPos.x, changePos.x - startPos.x, duration);
-        var y = EasingFunction.EaseOutQuint(time, startPos.y, changePos.y - startPos.y, duration);
+        var x = EasingFunctions.EaseOutQuint(time, startPos.x, changePos.x - startPos.x, duration);
+        var y = EasingFunctions.EaseOutQuint(time, startPos.y, changePos.y - startPos.y, duration);
         Position = new Vector2(x, y);
     }
 
@@ -100,7 +85,6 @@ public class TitleScreenCursor : Node2D
                         break;
                     case MenuIndex.Options:
                         ResetTween();
-
                         menu = Menu.Option;
                         optionScreenGUI.Visible = true;
                         titleScreenGUI.Visible = false;
@@ -185,5 +169,20 @@ public class TitleScreenCursor : Node2D
 
             AnimateTween(prevPos, labelPos);
         }
+    }
+
+    enum Menu
+    {
+        Title, Option
+    }
+
+    enum MenuIndex
+    {
+        Play, Options, Quit
+    }
+
+    enum OptionMenuIndex
+    {
+        Resolution, Fullscreen, Vsync
     }
 }

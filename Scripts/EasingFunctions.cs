@@ -1,6 +1,6 @@
 using System;
 
-public class EasingFunction
+public class EasingFunctions
 {
     static public float EaseOutQuint(float currentTime, float startValue, float change, int duration)
     {

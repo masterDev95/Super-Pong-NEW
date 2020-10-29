@@ -1,25 +1,14 @@
 using Godot;
 using System;
 
-enum PauseIndex
-{
-    Yes, No
-}
-
 public class PauseScreen : Node2D
 {
-    private PauseIndex _index;
+    private PauseIndexes _index;
 
 	public PauseScreen()
 	{
-        _index = PauseIndex.No;
+        _index = PauseIndexes.No;
 	}
-
-    internal PauseIndex Index
-    {
-        get => _index;
-        set => _index = value;
-    }
 
     public override void _Process(float delta)
     {
@@ -39,28 +28,28 @@ public class PauseScreen : Node2D
 
             if (Input.IsActionJustPressed("ui_up") || Input.IsActionJustPressed("ui_down"))
             {
-                if (Index == PauseIndex.Yes)
-                    Index++;
+                if (_index == PauseIndexes.Yes)
+                    _index++;
                 else
-                    Index--;
+                    _index--;
             }
 
             if (Input.IsActionJustPressed("ui_accept"))
             {
-                GetTree().Paused = false;            
+                GetTree().Paused = false;
                 
-                if (Index == PauseIndex.Yes)
+                if (_index == PauseIndexes.Yes)
                     GetTree().ChangeScene("res://Scenes/Rooms/TitleScreen.tscn");
                 else
                     Visible = false;
             }
 
-            switch (Index)
+            switch (_index)
             {
-                case PauseIndex.Yes:
+                case PauseIndexes.Yes:
                     cursor.SetPosition(yesLabel.RectPosition);
                     break;
-                case PauseIndex.No:
+                case PauseIndexes.No:
                     cursor.SetPosition(noLabel.RectPosition);
                     break;
             }
@@ -71,5 +60,10 @@ public class PauseScreen : Node2D
         {
             GetTree().Paused = false;
         }
+    }
+
+    private enum PauseIndexes
+    {
+        Yes, No
     }
 }

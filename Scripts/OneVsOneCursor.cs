@@ -1,46 +1,20 @@
 using Godot;
 using System;
 
-enum Choice
-{
-    Yes, No
-}
-
 public class OneVsOneCursor : Node2D
 {
-    Choice choice;
-
-    Vector2 prevPos;
-    int time;
-    int duration;
-
-    Sprite sprite;
-    Vector2 spriteSize;
-
-    private void AnimateTween(Vector2 startPos, Vector2 changePos)
-    {
-        if (time < duration) time++;
-        var x = EasingFunction.EaseOutQuint(time, startPos.x, changePos.x - startPos.x, duration);
-        var y = EasingFunction.EaseOutQuint(time, startPos.y, changePos.y - startPos.y, duration);
-        Position = new Vector2(x, y);
-    }
-
-    private void ResetTween()
-    {
-        prevPos = Position;
-        time    = 0;
-    }
+    private Choices choice;
+    private Vector2 prevPos;
+    private int time;
+    private int duration;
 
     public override void _Ready()
     {
-        choice = Choice.No;
+        choice = Choices.No;
 
         prevPos = Position;
         time = 0;
         duration = 45;
-
-        sprite      = GetNode<Sprite>("Sprite");
-        spriteSize  = sprite.Texture.GetSize() * sprite.Scale;
 
         SetProcess(false);
     }
@@ -54,19 +28,20 @@ public class OneVsOneCursor : Node2D
 
         if (Input.IsActionJustPressed("ui_up") || Input.IsActionJustPressed("ui_down"))
         {
-            if (choice == Choice.Yes)
-                choice = Choice.No;
+            if (choice == Choices.Yes)
+                choice = Choices.No;
             else
-                choice = Choice.Yes;
+                choice = Choices.Yes;
 
-            ResetTween();
+            prevPos = Position;
+            time = 0;
         }
 
         if (Input.IsActionJustPressed("ui_accept"))
         {
             GetTree().Paused = false;
 
-            if (choice == Choice.Yes)
+            if (choice == Choices.Yes)
                 GetTree().ChangeScene("res://Scenes/Rooms/TitleScreen.tscn");
             else
                 root.Visible = false;
@@ -82,18 +57,29 @@ public class OneVsOneCursor : Node2D
 
         switch (choice)
         {
-            case Choice.Yes:
+            case Choices.Yes:
                 label = marginContainer.GetNode<Label>("HBoxContainer/ChoiceContainer/Yes");
                 break;
-            case Choice.No:
+            case Choices.No:
                 label = marginContainer.GetNode<Label>("HBoxContainer/ChoiceContainer/No");
                 break;
         }
 
-        float x         = menuContainer.RectPosition.y + 112;
-        float y         = menuContainer.RectPosition.y + marginContainer.RectPosition.y + label.RectPosition.y + label.RectSize.y / 2 ;
-        var labelPos    = new Vector2(x, y);
+        var x = menuContainer.RectPosition.y + 112;
+        var y = menuContainer.RectPosition.y + marginContainer.RectPosition.y + label.RectPosition.y + label.RectSize.y / 2;
+        var labelPos = new Vector2(x, y);
 
-        AnimateTween(prevPos, labelPos);
+        // Ease movement
+
+        if (time < duration) time++;
+
+        x = EasingFunctions.EaseOutQuint(time, prevPos.x, labelPos.x - prevPos.x, duration);
+        y = EasingFunctions.EaseOutQuint(time, prevPos.y, labelPos.y - prevPos.y, duration);
+
+        Position = new Vector2(x, y);
+    }
+    private enum Choices
+    {
+        Yes, No
     }
 }

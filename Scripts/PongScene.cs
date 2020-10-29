@@ -3,28 +3,18 @@ using System;
 
 public class PongScene : Node2D
 {
-    private void PaddleReposition()
-	{
-		KinematicBody2D p1 = GetNode<KinematicBody2D>("Player1");
-		KinematicBody2D p2 = GetNode<KinematicBody2D>("Player2");
-
-		float yPos		= GetViewport().GetVisibleRect().Size.y / 2;
-		float p2XPos	= GetViewport().GetVisibleRect().Size.x - 64;
-
-		p1.Position = new Vector2(p1.Position.x, yPos);
-		p2.Position = new Vector2(p2XPos, yPos);
-	}
-
-	private void BallReposition()
-	{
-		KinematicBody2D ball = GetNode<KinematicBody2D>("Ball");
-		ball.Position = GetViewport().GetVisibleRect().Size / 2;
-	}
-
 	public override void _Ready()
 	{
-		PaddleReposition();
-		BallReposition();
+		KinematicBody2D ball = GetNode<KinematicBody2D>("Ball");
+		KinematicBody2D p1 = GetNode<KinematicBody2D>("Player1");
+		KinematicBody2D p2 = GetNode<KinematicBody2D>("Player2");
+		int xPlayersMargin = 64;
+		float yPos = GetViewport().GetVisibleRect().Size.y / 2;
+		float p2XPos = GetViewport().GetVisibleRect().Size.x - xPlayersMargin;
+
+		ball.Position = GetViewport().GetVisibleRect().Size / 2;
+		p1.Position = new Vector2(xPlayersMargin, yPos);
+		p2.Position = new Vector2(p2XPos, yPos);
 	}
 
 	public override void _Process(float delta)
